@@ -102,6 +102,8 @@ const hands = new Hands({
 });
 
 let customModel = null;
+const MODEL_URL = "https://raw.githubusercontent.com/pedromourente/ASLUNDERPRESSURE/main/frontend/model/alphabet/model.json";
+const WORDS_BASE_URL = "https://raw.githubusercontent.com/pedromourente/ASLUNDERPRESSURE/main/frontend/assets/randomWords";
 
 hands.setOptions({
   maxNumHands: 1,
@@ -112,9 +114,11 @@ hands.setOptions({
 });
 
 async function loadModel() {
-  customModel = await tf.loadLayersModel(
-    "https://raw.githubusercontent.com/pedromourente/DeepSL/main/model/tfjs_model/model.json"
-  );
+  try {
+    customModel = await tf.loadLayersModel(MODEL_URL);
+  } catch (error) {
+    console.error("Failed to load ASL model:", error);
+  }
 }
 
 loadModel();
@@ -292,6 +296,10 @@ const input2=add(
       // console.log(results.multiHandLandmarks[0])
     }
     if (results.multiHandLandmarks.length > 0) {
+      if (!customModel) {
+        canvasCtx.restore();
+        return;
+      }
       // console.log("hello world");
       const landmarks = calc_landmark_list(videoWidth, videoHeight, results.multiHandLandmarks[0]);
   
@@ -575,17 +583,17 @@ scene("menu",()=>{
   fire.play("ablaze");
 
 
-  getFile('https://raw.githubusercontent.com/pedromourente/DeepSL/main/hard.txt').then(content =>{
+  getFile(`${WORDS_BASE_URL}/hard.txt`).then(content =>{
     // Using split method and passing "\n" as parameter for splitting
     let normalWords =  content.trim().split("\n");
     console.log(normalWords);
 
-    getFile('https://raw.githubusercontent.com/pedromourente/DeepSL/main/extreme.txt').then(content =>{
+    getFile(`${WORDS_BASE_URL}/extreme.txt`).then(content =>{
     // Using split method and passing "\n" as parameter for splitting
     let hardWords  =  content.trim().split("\n");
     console.log(hardWords);
 
-    getFile('https://raw.githubusercontent.com/pedromourente/DeepSL/main/normal.txt').then(content =>{
+    getFile(`${WORDS_BASE_URL}/normal.txt`).then(content =>{
       // Using split method and passing "\n" as parameter for splitting
       let easyWords =  content.trim().split("\n");
       console.log(easyWords);

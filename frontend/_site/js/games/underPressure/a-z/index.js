@@ -102,6 +102,7 @@ const hands = new Hands({
 });
 
 let customModel = null;
+const MODEL_URL = "https://raw.githubusercontent.com/pedromourente/ASLUNDERPRESSURE/main/frontend/model/alphabet/model.json";
 
 hands.setOptions({
   maxNumHands: 1,
@@ -112,9 +113,11 @@ hands.setOptions({
 });
 
 async function loadModel() {
-  customModel = await tf.loadLayersModel(
-    "https://raw.githubusercontent.com/pedromourente/DeepSL/main/model/tfjs_model/model.json"
-  );
+  try {
+    customModel = await tf.loadLayersModel(MODEL_URL);
+  } catch (error) {
+    console.error("Failed to load ASL model:", error);
+  }
 }
 
 loadModel();
@@ -292,6 +295,10 @@ const input2=add(
       // console.log(results.multiHandLandmarks[0])
     }
     if (results.multiHandLandmarks.length > 0) {
+      if (!customModel) {
+        canvasCtx.restore();
+        return;
+      }
       // console.log("hello world");
       const landmarks = calc_landmark_list(videoWidth, videoHeight, results.multiHandLandmarks[0]);
   
