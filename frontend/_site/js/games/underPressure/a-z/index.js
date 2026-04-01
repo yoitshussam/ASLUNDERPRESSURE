@@ -102,7 +102,8 @@ const hands = new Hands({
 });
 
 let customModel = null;
-const MODEL_URL = "https://raw.githubusercontent.com/pedromourente/ASLUNDERPRESSURE/main/frontend/model/alphabet/model.json";
+const MODEL_URL = "https://raw.githubusercontent.com/yoitshussam/ASLUNDERPRESSURE/main/frontend/model/alphabet/model.json";
+const WORDS_BASE_URL = "https://raw.githubusercontent.com/yoitshussam/ASLUNDERPRESSURE/main/frontend/assets/Games";
 
 hands.setOptions({
   maxNumHands: 1,
@@ -582,17 +583,17 @@ scene("menu",()=>{
   fire.play("ablaze");
 
 
-  getFile('https://raw.githubusercontent.com/pedromourente/ASLUNDERPRESSURE/main/frontend/assets/randomWords/hard.txt').then(content =>{
+  getFile(`${WORDS_BASE_URL}/hard.txt`).then(content =>{
     // Using split method and passing "\n" as parameter for splitting
     let normalWords =  content.trim().split("\n");
     console.log(normalWords);
 
-    getFile('https://raw.githubusercontent.com/pedromourente/ASLUNDERPRESSURE/main/frontend/assets/randomWords/extreme.txt').then(content =>{
+    getFile(`${WORDS_BASE_URL}/extreme.txt`).then(content =>{
     // Using split method and passing "\n" as parameter for splitting
     let hardWords  =  content.trim().split("\n");
     console.log(hardWords);
 
-    getFile('https://raw.githubusercontent.com/pedromourente/ASLUNDERPRESSURE/main/frontend/assets/randomWords/normal.txt').then(content =>{
+    getFile(`${WORDS_BASE_URL}/normal.txt`).then(content =>{
       // Using split method and passing "\n" as parameter for splitting
       let easyWords =  content.trim().split("\n");
       console.log(easyWords);

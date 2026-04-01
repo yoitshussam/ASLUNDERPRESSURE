@@ -102,8 +102,8 @@ const hands = new Hands({
 });
 
 let customModel = null;
-const MODEL_URL = "https://raw.githubusercontent.com/pedromourente/ASLUNDERPRESSURE/main/frontend/model/alphabet/model.json";
-const WORDS_BASE_URL = "https://raw.githubusercontent.com/pedromourente/ASLUNDERPRESSURE/main/frontend/assets/randomWords";
+const MODEL_URL = "https://raw.githubusercontent.com/yoitshussam/ASLUNDERPRESSURE/main/frontend/model/alphabet/model.json";
+const WORDS_BASE_URL = "https://raw.githubusercontent.com/yoitshussam/ASLUNDERPRESSURE/main/frontend/assets/Games";
 
 hands.setOptions({
   maxNumHands: 1,
