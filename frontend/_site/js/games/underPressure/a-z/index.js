@@ -88,10 +88,20 @@ function letter2White(word)
   return word
 }
 
+function addFullscreenLayer(spriteName, depth = 0) {
+  return add([
+    sprite(spriteName, { width: width(), height: height() }),
+    pos(0, 0),
+    fixed(),
+    z(depth),
+  ]);
+}
+
 //let randomWord="HUSSAM"
 kaboom({
   background: [147, 231, 255],
-  font:"pixel"
+  font:"pixel",
+  fullscreen: true,
 });
 
 
@@ -377,10 +387,10 @@ const score=add([
 
 
 let health=3
-add([area(),sprite("clouds2"),z(4),scale(4.8)])
-add([area(),sprite("clouds1"),z(0),scale(4.8)])
+  addFullscreenLayer("clouds2", 4)
+  addFullscreenLayer("clouds1", 0)
 
-add([area(),sprite("clouds0"),z(-2),scale(4.8)])
+  addFullscreenLayer("clouds0", -2)
 add([area(),sprite("coin"),z(5),scale(4.8),pos(205 ,140)])
 add([area(),sprite("detectBox"),z(2),scale(1.2),pos(1350,290)])
 
@@ -472,7 +482,7 @@ go("win",hiScore)
 
 scene("lose", (score) => {
 
-  add([area(),sprite("forest"),z(-2),scale(4.8)])
+  addFullscreenLayer("forest", -2)
 
 	add([
     pos(center()),
@@ -504,9 +514,9 @@ scene("lose", (score) => {
 
 scene("win", (score) => {
 
-  add([area(),sprite("clouds2"),z(4),scale(4.8)])
-  add([area(),sprite("clouds11"),z(3),scale(4.8)])
-  add([area(),sprite("clouds0"),z(-2),scale(4.8)])
+  addFullscreenLayer("clouds2", 4)
+  addFullscreenLayer("clouds11", 3)
+  addFullscreenLayer("clouds0", -2)
 
   // const cats=add([area(),sprite("cats"),z(6),scale(5),anchor("center"),pos(100,height()-80)])
   // cats.play("poof");
@@ -575,9 +585,9 @@ scene("menu",()=>{
   //     please.destroy()
   // })
 
-  add([area(),sprite("clouds2"),z(5),scale(4.8)])
-  add([area(),sprite("clouds11"),z(4),scale(4.8)])
-  add([area(),sprite("clouds0"),z(-2),scale(4.8)])
+  addFullscreenLayer("clouds2", 5)
+  addFullscreenLayer("clouds11", 4)
+  addFullscreenLayer("clouds0", -2)
   add([area(),sprite("fist2"),z(3),scale(1.5),anchor("center"),pos(width()/2,height()/2-100)])
   const fire=add([area(),sprite("fire"),z(2),scale(2.2),anchor("center"),pos(width()/2,height()/2-100)])
   fire.play("ablaze");
